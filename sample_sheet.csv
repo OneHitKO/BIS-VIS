@@ -1,0 +1,10 @@
+﻿ID,Sample,Cell_Type,Donor,Purification
+KO_1,CD4mem10,CD4mem,B10,FACS
+KO_2,CD4mem09,CD4mem,B09,FACS
+KO_3,CD4na10,CD4na,B10,FACS
+KO_4,CD4na09,CD4na,B09,FACS
+KO_5,Line01.2xA,Treg,D01,Beads
+KO_6,Treg10,Treg,B10,FACS
+KO_7,Treg09,Treg,B09,FACS
+KO_8,Line01.1xA,Treg,D01,Beads
+KO_9,Line01,Treg,D01,Beads
