@@ -46,6 +46,7 @@ meth.data = dplyr::bind_rows(cov.df.list)
 ## Read and add sample sheet 
 sample.sh <- read_csv("sample_sheet.csv")
 meth.data <- read_rds("meth.data")
+
 ## Add sample features to meth.data
 meth.data <- left_join(meth.data, sample.sh, by = "Sample")
 ```
@@ -75,10 +76,10 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(
             selectInput(inputId = "Color.By", label = "Select color code", 
-                        choices = colnames(pca.plot)[12:length(colnames(pca.plot))]), 
+                        choices = str_subset(colnames(pca.plot),"PC", negate = TRUE)), 
             
             selectInput(inputId = "pc.x", label = "Select which PC to view on X axis",
-                        choices = colnames(pca.plot)[2:09])
+                        choices = str_subset(colnames(pca.plot),"PC"))
             
             ),
         
@@ -110,7 +111,8 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(
             # Select which samples to analyze
-            checkboxGroupInput(inputId = "Select.Samples", label = "Select individual samples to view", choices                               = unique(meth.data$Sample))
+            checkboxGroupInput(inputId = "Select.Samples", label = "Select individual samples to view", 
+                               choices = unique(meth.data$Sample))
             ),
         
         mainPanel(
@@ -143,8 +145,8 @@ ui <- fluidPage(
     
   sidebarLayout(
         sidebarPanel(
-            selectInput(inputId = "Select.Group", label = "Select which group to analyze",
-                               choices = colnames(meth.data)[8:length(colnames(meth.data))])
+            selectInput(inputId = "Select.Group", label = "Select which group to analyze", 
+                        choices = str_subset(colnames(pca.plot),"PC|Sample|ID", negate = TRUE))
             ),
         
         mainPanel(
